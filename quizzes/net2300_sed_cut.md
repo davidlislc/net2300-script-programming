@@ -77,10 +77,3 @@
 - C) shift
 - D) echo
 
-**12. If you want to extract the 1st and 3rd fields from a colon-separated file, which command is correct?**
-
-- A) cut -c 1,3 file
-- B) cut -d ':' -f 1,3 /etc/passwd
-- C) cut -b 1,3 file
-- D) cut -f 1-3 -d ':' file
-

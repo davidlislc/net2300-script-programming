@@ -14,42 +14,49 @@
 - C) Finds two commas in the second line
 - D) Creates a second CSV file
 
-**3. What is the purpose of the 'shift' command in Bash scripting?**
+**3. If you want to extract the 1st and 3rd fields from a colon-separated file, which command is correct?**
+
+- A) cut -c 1,3 file
+- B) cut -d ':' -f 1,3 /etc/passwd
+- C) cut -b 1,3 file
+- D) cut -f 1-3 -d ':' file
+
+**4. What is the purpose of the 'shift' command in Bash scripting?**
 
 - A) To move a file to a new directory
 - B) To change the script's permissions
 - C) To manipulate positional parameters by shifting them to the left
 - D) To exit the current loop
 
-**4. By default, how many positions does the 'shift' command move parameters?**
+**5. By default, how many positions does the 'shift' command move parameters?**
 
 - A) 0
 - B) 1
 - C) 2
 - D) All parameters
 
-**5. If a script is run as './script.sh apple banana' and 'shift' is called, what does $1 become?**
+**6. If a script is run as './script.sh apple banana' and 'shift' is called, what does $1 become?**
 
 - A) apple
 - B) banana
 - C) script.sh
 - D) null
 
-**6. Which 'cut' option allows you to select bytes by position?**
+**7. Which 'cut' option allows you to select bytes by position?**
 
 - A) -c
 - B) -d
 - C) -b
 - D) -f
 
-**7. In the command 'shift [n]', what does 'n' represent?**
+**8. In the command 'shift [n]', what does 'n' represent?**
 
 - A) The name of the parameter
 - B) The number of positions to shift
 - C) The new value of the parameter
 - D) The script version
 
-**8. Which command is used to specify a delimiter for fields when using cut?**
+**9. Which command is used to specify a delimiter for fields when using cut?**
 
 - A) -d
 - B) -f
