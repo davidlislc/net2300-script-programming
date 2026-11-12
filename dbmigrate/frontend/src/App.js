@@ -136,9 +136,9 @@ function App() {
   const exportDatabase = async (database) => {
     const timestamp = getTimestamp();
     const commands = {
-      logdb: `mysqldump --skip-add-drop-table --complete-insert -h 127.0.0.1 -u root -prootpassword logdb > backup_${timestamp}.sql`,
-      logdbqa: `mysqldump -h 127.0.0.1 -u root -prootpassword logdbqa > backup_qa_${timestamp}.sql`,
-      logdbprod: `mysqldump -h 127.0.0.1 -u root -prootpassword logdbprod > backup_prod_${timestamp}.sql`
+      logdbdev: `mysqldump --skip-ssl --skip-add-drop-table --complete-insert -h 127.0.0.1 -u root -prootpassword logdbdev > backup_${timestamp}.sql`,
+      logdbqa: `mysqldump --skip-ssl -h 127.0.0.1 -u root -prootpassword logdbqa > backup_qa_${timestamp}.sql`,
+      logdbprod: `mysqldump --skip-ssl -h 127.0.0.1 -u root -prootpassword logdbprod > backup_prod_${timestamp}.sql`
     };
 
     const command = commands[database];
@@ -171,7 +171,7 @@ function App() {
     const db = entry.database_name;
     const file = entry.filename;
     // Drop/recreate DB, then import with FK checks disabled in a single session using shell script
-    const command = `mysql -h 127.0.0.1 -u root -prootpassword -e "DROP DATABASE IF EXISTS ${db}; CREATE DATABASE ${db};" && (echo "SET FOREIGN_KEY_CHECKS=0;" && cat "${file}" && echo "SET FOREIGN_KEY_CHECKS=1;") | mysql -h 127.0.0.1 -u root -prootpassword ${db}`;
+    const command = `mysql --skip-ssl  -h 127.0.0.1 -u root -prootpassword -e "DROP DATABASE IF EXISTS ${db}; CREATE DATABASE ${db};" && (echo "SET FOREIGN_KEY_CHECKS=0;" && cat "${file}" && echo "SET FOREIGN_KEY_CHECKS=1;") | mysql --skip-ssl -h 127.0.0.1 -u root -prootpassword ${db}`;
 
     const result = await createLog({
       message: command,
@@ -346,7 +346,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>📝 MariaDB migrate Manager</h1>
+        <h1>📝 MariaDB Migrate Manager</h1>
         <p>Net23000 class project</p>
         <h2>Update engine.sh with your database connection details</h2>
       </header>
@@ -359,7 +359,7 @@ function App() {
               className={`tab-button ${activeTab === 'commands' ? 'active' : ''}`}
               onClick={() => setActiveTab('commands')}
             >
-              📋 Commands
+              📋 Dashboard
             </button>
             <button
               className={`tab-button ${activeTab === 'executions' ? 'active' : ''}`}
@@ -414,7 +414,7 @@ function App() {
                         className="btn btn-primary"
                       >
                         <option value="">💾 Export Database</option>
-                        <option value="logdb">Export logdb</option>
+                        <option value="logdbdev">Export logdbdev</option>
                         <option value="logdbqa">Export logdbqa</option>
                         <option value="logdbprod">Export logdbprod</option>
                       </select>
@@ -427,7 +427,7 @@ function App() {
               {/* Log List Section */}
               <section className="card">
                 <div className="logs-header">
-                  <h2>Command Entries</h2>
+                  <h2>Migrate request results</h2>
                   <div className="controls">
                     <button onClick={fetchLogs} className="btn btn-secondary">
                       🔄 Refresh
