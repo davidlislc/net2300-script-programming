@@ -430,3 +430,4 @@ docker compose up -d
 # Verify the tables were created in logdb
 docker exec -it logapp-mariadb mysql -uroot -prootpassword logdb -e "SHOW TABLES;"
 
+![alt text](image.png)
